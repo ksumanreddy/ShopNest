@@ -27,7 +27,7 @@ public class SelfProductService implements ProductService {
 
     @Override
     public List<Product> getAllProducts() {
-        return productRepo.findAll()ZZ;
+        return productRepo.findAll();
     }
 
     @Override
