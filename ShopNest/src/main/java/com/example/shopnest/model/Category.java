@@ -1,6 +1,7 @@
 package com.example.shopnest.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
@@ -13,6 +14,6 @@ import java.util.List;
 @Entity
 public class Category extends BaseModel {
     private String title;
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", fetch=FetchType.EAGER)
     private List<Product> products;
 }

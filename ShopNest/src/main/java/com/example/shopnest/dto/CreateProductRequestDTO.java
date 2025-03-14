@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CreateProductRequestDTO {
     private String title;
-    private String image;
+    private String imageURL;
     private String description;
     private CategoryRequestDTO category;
 }

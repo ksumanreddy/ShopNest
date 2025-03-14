@@ -1,5 +1,6 @@
 package com.example.shopnest.controller;
 
+import com.example.shopnest.dto.CategoryRequestDTO;
 import com.example.shopnest.dto.CreateProductRequestDTO;
 import com.example.shopnest.model.Product;
 import com.example.shopnest.service.ProductService;
@@ -22,7 +23,7 @@ public class ProductController {
         if(id == null) {
             throw new IllegalAccessException("Id cannot be null");
         }
-        return  service.getProductByid(id);
+        return service.getProductByid(id);
     }
     //Get all products
     @GetMapping("/products")
@@ -36,7 +37,7 @@ public class ProductController {
     //  Create a product
     @PostMapping("/products")
     public Product createProduct(@RequestBody CreateProductRequestDTO request) {
-        return service.createProduct(request.getTitle(),request.getImage(),request.getDescription(),request.getImage());
+        return service.createProduct(request.getTitle(),request.getImageURL(),request.getDescription(),request.getCategory().getTitle());
 
     }
     ///  update product

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service("selfProductService")
 public class SelfProductService implements ProductService {
@@ -39,11 +40,17 @@ public class SelfProductService implements ProductService {
       product.setDescription(description);
       product.getCreatedAt( new Date());
       product.getUpdatedAt( new Date());
-      Category existingCategory = categoryRepo.findByTitle(catTitle).get();
-      if (existingCategory == null) {
-          category.setTitle(catTitle);
-//          category = categoryRepo.save(category);
+      Optional<Category> optionalCategory = categoryRepo.findByTitle(catTitle);
+      if (optionalCategory.isPresent()) {
+          category = optionalCategory.get();
       }
+      else {
+            category = new Category();
+            category.getCreatedAt(new Date());
+            category.getUpdatedAt(new Date());
+            category.setTitle(catTitle);
+            category = categoryRepo.save(category);
+        }
       product.setCategory(category);
       Product response = productRepo.save(product);
       return response;
