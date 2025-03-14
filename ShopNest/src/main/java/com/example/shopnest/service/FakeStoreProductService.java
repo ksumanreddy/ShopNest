@@ -7,18 +7,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
-public class FakeStoreProductService {
+@Service("fakeStoreProductService")
+public class FakeStoreProductService implements ProductService {
 
     private RestTemplate restTemplate;
 
     public FakeStoreProductService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
-
+    @Override
     public Product getProductByid(Integer id) {
         Product product = new Product();
         ResponseEntity<FakeStoreResponseDTO> fakeStoreResponse =
@@ -34,6 +35,7 @@ public class FakeStoreProductService {
         product = convertFakeStoreResponseToProduct(response);
         return product;
     }
+    @Override
     public List<Product> getAllProducts(){
         List<Product> response = new ArrayList<>();
         ResponseEntity<FakeStoreResponseDTO[]> fakeStoreProducts =
@@ -43,6 +45,7 @@ public class FakeStoreProductService {
         }
         return response;
     }
+    @Override
     public Product createProduct(String title, String imageURL,String description, String catTitle) {
         Product response = new Product();
         FakeStoreResponseDTO  requestBody = new FakeStoreResponseDTO();
@@ -67,5 +70,4 @@ public class FakeStoreProductService {
        product.setImageURL(response.getImage());
        return product;
    }
-
 }

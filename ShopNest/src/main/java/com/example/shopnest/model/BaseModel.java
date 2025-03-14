@@ -6,20 +6,28 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Service;
 
 import java.util.Date;
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @MappedSuperclass
 public class BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) ///  Auto Increment part
     private Integer id;
-
     private Date createdAt;
     private Date updatedAt;
     private boolean isDeleted;
 
+    public void getUpdatedAt(Date date) {
+        this.updatedAt = date;
+    }
+
+    public void getCreatedAt(Date date) {
+        this.createdAt = date;
+    }
 }

@@ -2,6 +2,9 @@ package com.example.shopnest.controller;
 
 import com.example.shopnest.dto.CreateProductRequestDTO;
 import com.example.shopnest.model.Product;
+import com.example.shopnest.service.ProductService;
+import com.example.shopnest.service.SelfProductService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 import com.example.shopnest.service.FakeStoreProductService;
 
@@ -9,19 +12,15 @@ import java.util.List;
 
 @RestController
 public class ProductController {
-    private FakeStoreProductService service;
+    private ProductService service;
 
-    public ProductController(FakeStoreProductService inputService) {
+    public ProductController(@Qualifier("selfProductService") ProductService inputService) {
         this.service = inputService;
     }
     @GetMapping("/products/{id}")
-    public Product getProductById(@PathVariable("id") Integer id){
+    public Product getProductById(@PathVariable("id") Integer id) throws IllegalAccessException {
         if(id == null) {
-            try {
-                throw new IllegalAccessException("Id cannot be null");
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
-            }
+            throw new IllegalAccessException("Id cannot be null");
         }
         return  service.getProductByid(id);
     }
