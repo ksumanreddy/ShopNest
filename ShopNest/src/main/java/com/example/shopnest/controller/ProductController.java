@@ -42,12 +42,13 @@ public class ProductController {
     }
     ///  update product
     @PutMapping("/product/{id}")
-    public void updateProduct(@PathVariable("id") Integer id) {
-
+    public Product updateProduct(@PathVariable("id") Integer id, @RequestBody CreateProductRequestDTO request) {
+        //Integer id, String title, String imageURL, String description, String catTitle
+      return service.updateProduct(id,request.getTitle(),request.getImageURL(),request.getDescription(),request.getCategory().getTitle());
     }
     //delete a product by id
     @DeleteMapping("/product/{id}")
     public void deleteProduct(@PathVariable("id") Integer id) {
-
+       service.deleteProductById(id);
     }
 }

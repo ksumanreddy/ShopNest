@@ -58,7 +58,14 @@ public class FakeStoreProductService implements ProductService {
         response = convertFakeStoreResponseToProduct(fakeStoreResponse);
        return response;
     }
-
+    @Override
+    public Product updateProduct(Integer id, String title, String imageURL, String description, String catTitle) {
+        Product response = new Product();
+        return response;
+    }
+    @Override
+    public void deleteProductById(Integer id){
+    }
    private Product convertFakeStoreResponseToProduct(FakeStoreResponseDTO response) {
         Product product = new Product();
        Category category = new Category();

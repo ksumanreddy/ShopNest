@@ -22,8 +22,8 @@ public class SelfProductService implements ProductService {
     @Override
     public Product getProductByid(Integer id) {
         // select * from products where id = inuputId
-        Product product= productRepo.findById(id).get();
-        return product;
+        Optional<Product> product = productRepo.findById(id);
+        return product.orElseThrow(() -> new IllegalArgumentException("Product not found with ID: " + id));
     }
 
     @Override
@@ -54,5 +54,21 @@ public class SelfProductService implements ProductService {
       product.setCategory(category);
       Product response = productRepo.save(product);
       return response;
+    }
+    @Override
+    public Product updateProduct(Integer id, String title, String imageURL, String description, String catTitle) {
+        Product product = productRepo.findById(id).get();
+        product.setTitle(title);
+        product.setImageURL(imageURL);
+        product.setDescription(description);
+        product.getUpdatedAt( new Date());
+        product.getCategory().setTitle(catTitle);
+        Product response = productRepo.save(product);
+        return response;
+    }
+
+    @Override
+    public void deleteProductById(Integer id) {
+        productRepo.deleteById(id);
     }
 }

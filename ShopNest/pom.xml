@@ -10,6 +10,7 @@
     </parent>
     <groupId>com.example</groupId>
     <artifactId>ShopNest</artifactId>
+    <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>ShopNest</name>
     <description>ShopNest</description>
