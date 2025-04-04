@@ -3,6 +3,7 @@ package com.example.shopnest.service;
 import com.example.shopnest.dto.FakeStoreResponseDTO;
 import com.example.shopnest.model.Category;
 import com.example.shopnest.model.Product;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -65,6 +66,11 @@ public class FakeStoreProductService implements ProductService {
     }
     @Override
     public void deleteProductById(Integer id){
+    }
+
+    @Override
+    public Page<Product> getPaginatedProducts(int pageno, int pagesize) {
+        return null;
     }
    private Product convertFakeStoreResponseToProduct(FakeStoreResponseDTO response) {
         Product product = new Product();

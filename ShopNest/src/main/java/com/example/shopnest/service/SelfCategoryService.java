@@ -3,6 +3,10 @@ package com.example.shopnest.service;
 import com.example.shopnest.model.Category;
 import com.example.shopnest.model.Product;
 import com.example.shopnest.repository.CategoryRepo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -48,5 +52,10 @@ public class SelfCategoryService implements CategoryService {
     @Override
     public void deleteCategoryById(Integer id){
        categoryRepo.deleteById(id);
+    }
+    @Override
+    public Page<Category> getPaginatedCategory(int pageno, int pagesize){
+        Pageable pageable = PageRequest.of(pageno, pagesize, Sort.by("title").ascending());
+        return categoryRepo.findAll(pageable);
     }
 }

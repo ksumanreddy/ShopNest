@@ -1,6 +1,7 @@
 package com.example.shopnest.service;
 
 import com.example.shopnest.model.Category;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -12,4 +13,5 @@ public interface CategoryService {
     public Category addCategory(String title);
     public Category updateCategory(Integer id, String title);
     public void deleteCategoryById(Integer id);
+    public Page<Category> getPaginatedCategory(int pageNo, int pageSize);
 }

@@ -6,6 +6,7 @@ import com.example.shopnest.model.Product;
 import com.example.shopnest.service.ProductService;
 import com.example.shopnest.service.SelfProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import com.example.shopnest.service.FakeStoreProductService;
 
@@ -25,6 +26,7 @@ public class ProductController {
         }
         return service.getProductByid(id);
     }
+
     //Get all products
     @GetMapping("/products")
     public List<Product> getAllProducts(){
@@ -34,6 +36,11 @@ public class ProductController {
         return products;
     }
 
+    @GetMapping("/products/{pageno}/{pagesize}")
+    public Page<Product> getPaginatedProducts(@PathVariable("pageno") int pageno,
+                                              @PathVariable("pagesize") int pagesize){
+       return service.getPaginatedProducts(pageno, pagesize);
+    }
     //  Create a product
     @PostMapping("/products")
     public Product createProduct(@RequestBody CreateProductRequestDTO request) {

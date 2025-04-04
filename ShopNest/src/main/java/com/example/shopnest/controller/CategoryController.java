@@ -4,6 +4,7 @@ import com.example.shopnest.dto.CategoryRequestDTO;
 import com.example.shopnest.model.Category;
 import com.example.shopnest.service.CategoryService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,13 @@ public class CategoryController {
     public List<Category> getAllCategories() {
         return service.getAllCategories();
     }
+
+    @GetMapping("category/{pageNo}/{pageSize}")
+    public Page<Category> getPaginatedCategory(@PathVariable("pageNo") int pageNo,
+                                     @PathVariable("pageSize") int pageSize) {
+        return service.getPaginatedCategory(pageNo,pageSize);
+    }
+
     @PostMapping("category/")
     public Category addCategory(@RequestBody CategoryRequestDTO request) {
         return service.addCategory(request.getTitle());
